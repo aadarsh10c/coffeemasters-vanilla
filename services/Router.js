@@ -8,6 +8,7 @@ const Router = {
       });
     });
     window.addEventListener("popstate", (event) => {
+      console.log("Event", event);
       Router.go(event.state.route, false);
     });
     Router.go(location.pathname);
@@ -19,18 +20,17 @@ const Router = {
     let pageElement = null;
     switch (route) {
       case "/": {
-        pageElement = document.createElement("h1");
-        pageElement.innerText = "Menu";
+        pageElement = document.createElement("menu-page");
         break;
       }
       case "/order": {
-        pageElement = document.createElement("h1");
+        pageElement = document.createElement("order-page");
         pageElement.innerText = "Order";
         break;
       }
       default:
         if (route.startsWith("/product-")) {
-          pageElement = document.createElement("h1");
+          pageElement = document.createElement("details-page");
           pageElement.textContent("Details");
           pageElement.dataset.productId = route.substring(
             route.lastIndexOf("-") + 1
